@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:cxf="http://camel.apache.org/schema/cxf"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring       http://camel.apache.org/schema/spring/camel-spring.xsd    http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+    <bean
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="bean-5f7e7664-2167-4fdb-ba6a-0f9e8f675a56"/>
+    <bean class="org.gwilymgrp.ProductServiceImpl" id="productServiceImpl"/>
+    <cxf:cxfEndpoint address="http://localhost:9090/productService"
+        id="productServiceEndpoint" serviceClass="org.gwilymgrp.ws.product_service.Product"/>
+    <camelContext id="camelContext-64ba75ab-61ba-400f-a89e-fec3ecb4e153" xmlns="http://camel.apache.org/schema/spring">
+        <route id="wsRoute">
+            <from id="_from1" uri="cxf:bean:productServiceEndpoint"/>
+            <bean id="_bean1" ref="productServiceImpl"/>
+        </route>
+    </camelContext>
+</beans>
